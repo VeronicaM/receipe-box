@@ -1,21 +1,22 @@
 import React from 'react';
-import { Accordion, Panel, ListGroup,ListGroupItem, PageHeader  } from 'react-bootstrap';
+import { Button, ListGroup,ListGroupItem, PageHeader  } from 'react-bootstrap';
 
 const Recipe = (props) =>{
     const ingredients = props.ingredients.map((val)  =>{
-         return <ListGroupItem>{val}</ListGroupItem>
+         return <ListGroupItem key={props.eventKey.concat(val)}>{val}</ListGroupItem>
     });
     return (
-        <div>
-        <Accordion>
-            <Panel header={props.title} eventKey={props.eventKey} bsStyle="success">
+            <div>
              <PageHeader className ="ingredientsTitle">Ingredients</PageHeader>
                 <ListGroup>
                     {ingredients}
                 </ListGroup>
-            </Panel>
-            </Accordion>
-        </div>
+                <div>
+                    <Button bsStyle="danger">Delete</Button> 
+                    <Button>Edit</Button>
+                </div>
+            </div>
+           
     );
 
 };

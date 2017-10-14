@@ -1,12 +1,16 @@
 import React from 'react';
 import Recipe from './Recipe.jsx';
-import {Well} from 'react-bootstrap';
+import {Accordion, Panel} from 'react-bootstrap';
 const RecipeList = (props) =>{
     return (
         <div>
-             <Well>
-                 {props.data.map(recipe => <Recipe {...recipe}/>)}
-             </Well>
+            <Accordion>
+                {props.data.map(recipe => 
+                    <Panel key={recipe.eventKey} header={recipe.title} eventKey={recipe.eventKey} bsStyle="success">
+                        <Recipe  {...recipe}/>
+                    </Panel>
+                )}         
+            </Accordion>    
         </div>
     );
 }
