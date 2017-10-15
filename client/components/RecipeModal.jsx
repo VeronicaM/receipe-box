@@ -5,8 +5,8 @@ class RecipeModal extends React.Component{
     constructor(props){
       super(props);
       this.state = {
-                  recipe : this.props.recipe || '',
-                  ingredients :this.props.ingredients || '',
+                  recipeTitle : this.props.recipe.title || '',
+                  ingredients: this.props.recipe.ingredients || '',
                   formErrors: {recipe: '', ingredients: ''},
                   recipeValid: false,
                   ingredientsValid: false,
@@ -17,15 +17,17 @@ class RecipeModal extends React.Component{
     componentWillReceiveProps(nextProps) {
     
       this.setState({  
-              recipe : nextProps.recipe || '',
-              ingredients :nextProps.ingredients || '', 
+              recipeTitle : nextProps.recipe.title || '',
+              ingredients :nextProps.recipe.ingredients || '', 
+              recipe : nextProps.recipe,
               text:nextProps.edit ? "Edit" : "Add",
             });
     }
   
     handleSave(){
-        this.props.saveData({title:this.state.recipe, ingredients:this.state.ingredients});
-        this.setState({recipe:this.props.recipe || '', ingredients:this.props.ingredients || ''});
+       const saveRecipe = Object.assign({},this.state.recipe, {title:this.state.recipeTitle, ingredients:this.state.ingredients});
+        this.props.saveData(saveRecipe);
+        this.setState({recipeTitle:this.props.recipe.title || '', ingredients:this.props.recipe.ingredients || ''});
         this.props.close();
     };
     render(){
@@ -40,8 +42,8 @@ class RecipeModal extends React.Component{
               <ControlLabel>Recipe</ControlLabel>
               <FormControl 
                 type="text" 
-                value = {this.state.recipe}
-                onChange= {(event)=>this.setState({recipe : event.target.value})}
+                value = {this.state.recipeTitle}
+                onChange= {(event)=>this.setState({recipeTitle : event.target.value})}
                 placeholder="Recipe Name"
                 required />
             </FormGroup>

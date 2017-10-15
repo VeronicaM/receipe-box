@@ -6,7 +6,10 @@ const Recipe = (props) =>{
          return <ListGroupItem key={props.eventKey+val}>{val}</ListGroupItem>
     });
     const handleEdit = function(){
-        props.editRecipe({title:props.title, ingredients:props.ingredients});
+        props.editRecipe({title:props.title, ingredients:props.ingredients, eventKey:props.eventKey});
+    }
+    const handleDelete = function(){
+        props.deleteRecipe(props);
     }
     return (
             <div>
@@ -15,7 +18,7 @@ const Recipe = (props) =>{
                     {ingredients}
                 </ListGroup>
                 <div>
-                    <Button bsStyle="danger">Delete</Button> 
+                    <Button onClick={handleDelete} bsStyle="danger">Delete</Button> 
                     <Button onClick={handleEdit}>Edit</Button>
                 </div>
             </div>

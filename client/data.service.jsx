@@ -42,7 +42,16 @@ const DataService  = (() =>{
     }
     const editRecipe = function(recipe){
         let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
-        let  updatedRecipes = Object.assign({},recipes, recipe);
+        if(typeof recipe.ingredients !== "object"){
+            recipe.ingredients = recipe.ingredients.split(',');      
+        }
+        let updatedRecipes = recipes.map(function(r,i) {
+             if(r.eventKey === recipe.eventKey){
+                 return Object.assign({},r, recipe);
+             }else{
+                 return r;
+             }
+        });
         localStorage.setItem('recipes', JSON.stringify(updatedRecipes));
     }   
     return {

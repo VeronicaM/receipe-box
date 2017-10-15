@@ -9,8 +9,7 @@ import {Button, Well} from 'react-bootstrap';
         super(props);
         this.state = {
             recipes: DataService.getRecipes(),
-            recipe: '',
-            ingredients: '',
+            recipe: {},
             showModal: false,
         };
     }
@@ -19,16 +18,14 @@ import {Button, Well} from 'react-bootstrap';
         this.setState({
             showModal:true, 
             edit:false,
-            recipe:'',
-            ingredients:''
+            recipe:{},
         });
     }
     openEdit(recipe){
         this.setState({
                showModal:true,
                edit:true,
-               recipe : recipe.title,
-               ingredients : recipe.ingredients
+               recipe : recipe,
             });
     }
     close() {
@@ -42,18 +39,21 @@ import {Button, Well} from 'react-bootstrap';
         }
         this.setState({recipes:DataService.getRecipes()});
     }
+    deleteRecipe(data){
+        DataService.deleteRecipe(data);
+        this.setState({recipes:DataService.getRecipes()});
+    }
 
     render(){
         return (
             <div>
                 <Well>
-                    <RecipeList editRecipe={this.openEdit.bind(this)} data={this.state.recipes} />
+                    <RecipeList editRecipe={this.openEdit.bind(this)} deleteRecipe={this.deleteRecipe.bind(this)} data={this.state.recipes} />
                 </Well>
-                <Button bsStyle="primary" onClick={this.openAdd.bind(this)}>Add Recipe</Button>
+                <Button bsStyle="primary" bsSize="large" onClick={this.openAdd.bind(this)}>Add Recipe</Button>
                 <RecipeModal 
                     showModal={this.state.showModal} 
                     recipe = {this.state.recipe}
-                    ingredients = {this.state.ingredients}
                     edit={this.state.edit} 
                     close={this.close.bind(this)} 
                     saveData={this.saveData.bind(this)}
