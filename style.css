@@ -1,0 +1,31 @@
+.title {
+    color: red;
+    text-align: center;
+}
+
+.ingredientsTitle {
+    text-align: center;
+}
+
+.ingredientsTitle h1 {
+    font-size: 20px;
+}
+
+textarea {
+    resize: none;
+}
+
+body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-top: 30px;
+    height: 100vh;
+}
+
+#root {
+    width: 80%;
+}
