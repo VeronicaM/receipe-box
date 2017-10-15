@@ -7,7 +7,7 @@ const RecipeList = (props) =>{
             <Accordion>
                 {props.data.map(recipe => 
                     <Panel key={recipe.eventKey} header={recipe.title} eventKey={recipe.eventKey} bsStyle="success">
-                        <Recipe  {...recipe}/>
+                        <Recipe  editRecipe={props.editRecipe} {...recipe}/>
                     </Panel>
                 )}         
             </Accordion>    

@@ -3,8 +3,11 @@ import { Button, ListGroup,ListGroupItem, PageHeader  } from 'react-bootstrap';
 
 const Recipe = (props) =>{
     const ingredients = props.ingredients.map((val)  =>{
-         return <ListGroupItem key={props.eventKey.concat(val)}>{val}</ListGroupItem>
+         return <ListGroupItem key={props.eventKey+val}>{val}</ListGroupItem>
     });
+    const handleEdit = function(){
+        props.editRecipe({title:props.title, ingredients:props.ingredients});
+    }
     return (
             <div>
              <PageHeader className ="ingredientsTitle">Ingredients</PageHeader>
@@ -13,7 +16,7 @@ const Recipe = (props) =>{
                 </ListGroup>
                 <div>
                     <Button bsStyle="danger">Delete</Button> 
-                    <Button>Edit</Button>
+                    <Button onClick={handleEdit}>Edit</Button>
                 </div>
             </div>
            
